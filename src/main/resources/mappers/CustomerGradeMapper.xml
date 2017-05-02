@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaamoo.customermanagement.mappers.CustomerGradeMapper">
+  <resultMap id="BaseResultMap" type="com.kaamoo.customermanagement.entity.CustomerGrade">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="appKey" jdbcType="VARCHAR" property="appKey" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="limitAmounts" jdbcType="INTEGER" property="limitAmounts" />
+    <result column="daijiaAreaId" jdbcType="BIGINT" property="daijiaAreaId" />
+    <result column="defaultGrade" jdbcType="BIT" property="defaultGrade" />
+    <result column="companyId" jdbcType="BIGINT" property="companyId" />
+    <result column="companyName" jdbcType="VARCHAR" property="companyName" />
+    <result column="parallelOrderNumber" jdbcType="BIGINT" property="parallelOrderNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, appKey, created, updated, version, limitAmounts, daijiaAreaId, defaultGrade, 
+    companyId, companyName, parallelOrderNumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from passenger_grade
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from passenger_grade
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kaamoo.customermanagement.entity.CustomerGrade">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into passenger_grade (name, appKey, created, 
+      updated, version, limitAmounts, 
+      daijiaAreaId, defaultGrade, companyId, 
+      companyName, parallelOrderNumber)
+    values (#{name,jdbcType=CHAR}, #{appKey,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{updated,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{limitAmounts,jdbcType=INTEGER}, 
+      #{daijiaAreaId,jdbcType=BIGINT}, #{defaultGrade,jdbcType=BIT}, #{companyId,jdbcType=BIGINT}, 
+      #{companyName,jdbcType=VARCHAR}, #{parallelOrderNumber,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kaamoo.customermanagement.entity.CustomerGrade">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into passenger_grade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="appKey != null">
+        appKey,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="limitAmounts != null">
+        limitAmounts,
+      </if>
+      <if test="daijiaAreaId != null">
+        daijiaAreaId,
+      </if>
+      <if test="defaultGrade != null">
+        defaultGrade,
+      </if>
+      <if test="companyId != null">
+        companyId,
+      </if>
+      <if test="companyName != null">
+        companyName,
+      </if>
+      <if test="parallelOrderNumber != null">
+        parallelOrderNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="limitAmounts != null">
+        #{limitAmounts,jdbcType=INTEGER},
+      </if>
+      <if test="daijiaAreaId != null">
+        #{daijiaAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="defaultGrade != null">
+        #{defaultGrade,jdbcType=BIT},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="parallelOrderNumber != null">
+        #{parallelOrderNumber,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kaamoo.customermanagement.entity.CustomerGrade">
+    update passenger_grade
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="appKey != null">
+        appKey = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="limitAmounts != null">
+        limitAmounts = #{limitAmounts,jdbcType=INTEGER},
+      </if>
+      <if test="daijiaAreaId != null">
+        daijiaAreaId = #{daijiaAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="defaultGrade != null">
+        defaultGrade = #{defaultGrade,jdbcType=BIT},
+      </if>
+      <if test="companyId != null">
+        companyId = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="parallelOrderNumber != null">
+        parallelOrderNumber = #{parallelOrderNumber,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kaamoo.customermanagement.entity.CustomerGrade">
+    update passenger_grade
+    set name = #{name,jdbcType=CHAR},
+      appKey = #{appKey,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      limitAmounts = #{limitAmounts,jdbcType=INTEGER},
+      daijiaAreaId = #{daijiaAreaId,jdbcType=BIGINT},
+      defaultGrade = #{defaultGrade,jdbcType=BIT},
+      companyId = #{companyId,jdbcType=BIGINT},
+      companyName = #{companyName,jdbcType=VARCHAR},
+      parallelOrderNumber = #{parallelOrderNumber,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

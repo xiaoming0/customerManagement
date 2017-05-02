@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaamoo.customermanagement.mappers.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.kaamoo.customermanagement.entity.Customer">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="allowOverdraw" jdbcType="BIT" property="allowOverdraw" />
+    <result column="drawMoney" jdbcType="DOUBLE" property="drawMoney" />
+    <result column="nodrawMoney" jdbcType="DOUBLE" property="nodrawMoney" />
+    <result column="frozenMoney" jdbcType="DOUBLE" property="frozenMoney" />
+    <result column="enterpriseId" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="enterpriseName" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="plateNumber" jdbcType="VARCHAR" property="plateNumber" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="gradeId" jdbcType="BIGINT" property="gradeId" />
+    <result column="gradeName" jdbcType="VARCHAR" property="gradeName" />
+    <result column="inBlackList" jdbcType="BIT" property="inBlackList" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="channelId" jdbcType="BIGINT" property="channelId" />
+    <result column="channelName" jdbcType="VARCHAR" property="channelName" />
+    <result column="app_key" jdbcType="VARCHAR" property="app_key" />
+    <result column="companyId" jdbcType="BIGINT" property="companyId" />
+    <result column="companyName" jdbcType="VARCHAR" property="companyName" />
+    <result column="introducer" jdbcType="VARCHAR" property="introducer" />
+    <result column="introduceType" jdbcType="INTEGER" property="introduceType" />
+    <result column="drivingNumberTimes" jdbcType="BIGINT" property="drivingNumberTimes" />
+    <result column="deviceType" jdbcType="VARCHAR" property="deviceType" />
+    <result column="appVersion" jdbcType="VARCHAR" property="appVersion" />
+    <result column="receiptMoney" jdbcType="DOUBLE" property="receiptMoney" />
+    <result column="mileage" jdbcType="DOUBLE" property="mileage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, phone, allowOverdraw, drawMoney, nodrawMoney, frozenMoney, enterpriseId, 
+    enterpriseName, plateNumber, photo, gradeId, gradeName, inBlackList, type, idcard, 
+    gender, email, memo, latitude, longitude, address, created, updated, version, channelId, 
+    channelName, app_key, companyId, companyName, introducer, introduceType, drivingNumberTimes, 
+    deviceType, appVersion, receiptMoney, mileage
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from passenger
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from passenger
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kaamoo.customermanagement.entity.Customer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into passenger (name, phone, allowOverdraw, 
+      drawMoney, nodrawMoney, frozenMoney, 
+      enterpriseId, enterpriseName, plateNumber, 
+      photo, gradeId, gradeName, 
+      inBlackList, type, idcard, 
+      gender, email, memo, 
+      latitude, longitude, address, 
+      created, updated, version, 
+      channelId, channelName, app_key, 
+      companyId, companyName, introducer, 
+      introduceType, drivingNumberTimes, deviceType, 
+      appVersion, receiptMoney, mileage
+      )
+    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{allowOverdraw,jdbcType=BIT}, 
+      #{drawMoney,jdbcType=DOUBLE}, #{nodrawMoney,jdbcType=DOUBLE}, #{frozenMoney,jdbcType=DOUBLE}, 
+      #{enterpriseId,jdbcType=BIGINT}, #{enterpriseName,jdbcType=VARCHAR}, #{plateNumber,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{gradeId,jdbcType=BIGINT}, #{gradeName,jdbcType=VARCHAR}, 
+      #{inBlackList,jdbcType=BIT}, #{type,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
+      #{channelId,jdbcType=BIGINT}, #{channelName,jdbcType=VARCHAR}, #{app_key,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{introducer,jdbcType=VARCHAR}, 
+      #{introduceType,jdbcType=INTEGER}, #{drivingNumberTimes,jdbcType=BIGINT}, #{deviceType,jdbcType=VARCHAR}, 
+      #{appVersion,jdbcType=VARCHAR}, #{receiptMoney,jdbcType=DOUBLE}, #{mileage,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kaamoo.customermanagement.entity.Customer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into passenger
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="allowOverdraw != null">
+        allowOverdraw,
+      </if>
+      <if test="drawMoney != null">
+        drawMoney,
+      </if>
+      <if test="nodrawMoney != null">
+        nodrawMoney,
+      </if>
+      <if test="frozenMoney != null">
+        frozenMoney,
+      </if>
+      <if test="enterpriseId != null">
+        enterpriseId,
+      </if>
+      <if test="enterpriseName != null">
+        enterpriseName,
+      </if>
+      <if test="plateNumber != null">
+        plateNumber,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="gradeId != null">
+        gradeId,
+      </if>
+      <if test="gradeName != null">
+        gradeName,
+      </if>
+      <if test="inBlackList != null">
+        inBlackList,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="channelId != null">
+        channelId,
+      </if>
+      <if test="channelName != null">
+        channelName,
+      </if>
+      <if test="app_key != null">
+        app_key,
+      </if>
+      <if test="companyId != null">
+        companyId,
+      </if>
+      <if test="companyName != null">
+        companyName,
+      </if>
+      <if test="introducer != null">
+        introducer,
+      </if>
+      <if test="introduceType != null">
+        introduceType,
+      </if>
+      <if test="drivingNumberTimes != null">
+        drivingNumberTimes,
+      </if>
+      <if test="deviceType != null">
+        deviceType,
+      </if>
+      <if test="appVersion != null">
+        appVersion,
+      </if>
+      <if test="receiptMoney != null">
+        receiptMoney,
+      </if>
+      <if test="mileage != null">
+        mileage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="allowOverdraw != null">
+        #{allowOverdraw,jdbcType=BIT},
+      </if>
+      <if test="drawMoney != null">
+        #{drawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="nodrawMoney != null">
+        #{nodrawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenMoney != null">
+        #{frozenMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNumber != null">
+        #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null">
+        #{gradeId,jdbcType=BIGINT},
+      </if>
+      <if test="gradeName != null">
+        #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="inBlackList != null">
+        #{inBlackList,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="channelName != null">
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="app_key != null">
+        #{app_key,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="introducer != null">
+        #{introducer,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceType != null">
+        #{introduceType,jdbcType=INTEGER},
+      </if>
+      <if test="drivingNumberTimes != null">
+        #{drivingNumberTimes,jdbcType=BIGINT},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptMoney != null">
+        #{receiptMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="mileage != null">
+        #{mileage,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kaamoo.customermanagement.entity.Customer">
+    update passenger
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="allowOverdraw != null">
+        allowOverdraw = #{allowOverdraw,jdbcType=BIT},
+      </if>
+      <if test="drawMoney != null">
+        drawMoney = #{drawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="nodrawMoney != null">
+        nodrawMoney = #{nodrawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenMoney != null">
+        frozenMoney = #{frozenMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="enterpriseId != null">
+        enterpriseId = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNumber != null">
+        plateNumber = #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null">
+        gradeId = #{gradeId,jdbcType=BIGINT},
+      </if>
+      <if test="gradeName != null">
+        gradeName = #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="inBlackList != null">
+        inBlackList = #{inBlackList,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null">
+        channelId = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="channelName != null">
+        channelName = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="app_key != null">
+        app_key = #{app_key,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        companyId = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="introducer != null">
+        introducer = #{introducer,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceType != null">
+        introduceType = #{introduceType,jdbcType=INTEGER},
+      </if>
+      <if test="drivingNumberTimes != null">
+        drivingNumberTimes = #{drivingNumberTimes,jdbcType=BIGINT},
+      </if>
+      <if test="deviceType != null">
+        deviceType = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        appVersion = #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptMoney != null">
+        receiptMoney = #{receiptMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="mileage != null">
+        mileage = #{mileage,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kaamoo.customermanagement.entity.Customer">
+    update passenger
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      allowOverdraw = #{allowOverdraw,jdbcType=BIT},
+      drawMoney = #{drawMoney,jdbcType=DOUBLE},
+      nodrawMoney = #{nodrawMoney,jdbcType=DOUBLE},
+      frozenMoney = #{frozenMoney,jdbcType=DOUBLE},
+      enterpriseId = #{enterpriseId,jdbcType=BIGINT},
+      enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      plateNumber = #{plateNumber,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      gradeId = #{gradeId,jdbcType=BIGINT},
+      gradeName = #{gradeName,jdbcType=VARCHAR},
+      inBlackList = #{inBlackList,jdbcType=BIT},
+      type = #{type,jdbcType=INTEGER},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      channelId = #{channelId,jdbcType=BIGINT},
+      channelName = #{channelName,jdbcType=VARCHAR},
+      app_key = #{app_key,jdbcType=VARCHAR},
+      companyId = #{companyId,jdbcType=BIGINT},
+      companyName = #{companyName,jdbcType=VARCHAR},
+      introducer = #{introducer,jdbcType=VARCHAR},
+      introduceType = #{introduceType,jdbcType=INTEGER},
+      drivingNumberTimes = #{drivingNumberTimes,jdbcType=BIGINT},
+      deviceType = #{deviceType,jdbcType=VARCHAR},
+      appVersion = #{appVersion,jdbcType=VARCHAR},
+      receiptMoney = #{receiptMoney,jdbcType=DOUBLE},
+      mileage = #{mileage,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="selectByParam" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM passenger
+    <where>
+      <if test="phone != null">
+        AND phone LIKE #{phone}
+      </if>
+      <if test="name != null">
+        AND  `name` LIKE #{name}
+      </if>
+      <if test="companyId != null">
+        AND companyId = #{companyId}
+      </if>
+      <if test="allowOverdraw != null">
+        AND allowOverdraw = #{allowOverdraw}
+      </if>
+      <if test="gradeId != null">
+        <foreach collection="gradeId" open="AND gradeId IN(" close=")" separator="," item="gid">
+          #{gid}
+        </foreach>
+      </if>
+      <if test="type != null">
+        <foreach collection="type" open="AND type IN(" close=")" separator="," item="t">
+          #{t}
+        </foreach>
+      </if>
+    </where>
+
+    <if test="offset != null and limit != null">
+      LIMIT #{offset},#{limit}
+    </if>
+  </select>
+  <select id="countByParam" resultType="long">
+    SELECT COUNT(id)
+    FROM passenger
+    <where>
+      <if test="phone != null">
+        AND phone LIKE #{phone}
+      </if>
+      <if test="name != null">
+        AND  `name` LIKE #{name}
+      </if>
+      <if test="companyId != null">
+        AND companyId = #{companyId}
+      </if>
+      <if test="allowOverdraw != null">
+        AND allowOverdraw = #{allowOverdraw}
+      </if>
+      <if test="gradeId != null">
+        <foreach collection="gradeId" open="AND gradeId IN(" close=")" separator="," item="gid">
+          #{gid}
+        </foreach>
+      </if>
+      <if test="type != null">
+        <foreach collection="type" open="AND type IN(" close=")" separator="," item="t">
+          #{t}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
+</mapper>

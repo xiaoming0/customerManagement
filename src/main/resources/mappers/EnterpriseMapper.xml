@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaamoo.customermanagement.mappers.EnterpriseMapper">
+  <resultMap id="BaseResultMap" type="com.kaamoo.customermanagement.entity.Enterprise">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="allowOverdraw" jdbcType="BIT" property="allowOverdraw" />
+    <result column="grade_id" jdbcType="BIGINT" property="grade_id" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="appKey" jdbcType="VARCHAR" property="appKey" />
+    <result column="companyId" jdbcType="BIGINT" property="companyId" />
+    <result column="companyName" jdbcType="VARCHAR" property="companyName" />
+    <result column="drawMoney" jdbcType="DOUBLE" property="drawMoney" />
+    <result column="nodrawMoney" jdbcType="DOUBLE" property="nodrawMoney" />
+    <result column="frozenMoney" jdbcType="DOUBLE" property="frozenMoney" />
+    <result column="grade_name" jdbcType="VARCHAR" property="grade_name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="drivingNumberTimes" jdbcType="BIGINT" property="drivingNumberTimes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, address, memo, allowOverdraw, grade_id, created, updated, version, appKey, 
+    companyId, companyName, drawMoney, nodrawMoney, frozenMoney, grade_name, drivingNumberTimes,phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kaamoo.customermanagement.entity.Enterprise">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into enterprise (name, address, memo, 
+      allowOverdraw, grade_id, created, 
+      updated, version, appKey, 
+      companyId, companyName, drawMoney, 
+      nodrawMoney, frozenMoney, grade_name, 
+      drivingNumberTimes,phone)
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{allowOverdraw,jdbcType=BIT}, #{grade_id,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+      #{updated,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{appKey,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{drawMoney,jdbcType=DOUBLE}, 
+      #{nodrawMoney,jdbcType=DOUBLE}, #{frozenMoney,jdbcType=DOUBLE}, #{grade_name,jdbcType=VARCHAR}, 
+      #{drivingNumberTimes,jdbcType=BIGINT},#{phone})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kaamoo.customermanagement.entity.Enterprise">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="allowOverdraw != null">
+        allowOverdraw,
+      </if>
+      <if test="grade_id != null">
+        grade_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="appKey != null">
+        appKey,
+      </if>
+      <if test="companyId != null">
+        companyId,
+      </if>
+      <if test="companyName != null">
+        companyName,
+      </if>
+      <if test="drawMoney != null">
+        drawMoney,
+      </if>
+      <if test="nodrawMoney != null">
+        nodrawMoney,
+      </if>
+      <if test="frozenMoney != null">
+        frozenMoney,
+      </if>
+      <if test="grade_name != null">
+        grade_name,
+      </if>
+      <if test="drivingNumberTimes != null">
+        drivingNumberTimes,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="allowOverdraw != null">
+        #{allowOverdraw,jdbcType=BIT},
+      </if>
+      <if test="grade_id != null">
+        #{grade_id,jdbcType=BIGINT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="drawMoney != null">
+        #{drawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="nodrawMoney != null">
+        #{nodrawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenMoney != null">
+        #{frozenMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="grade_name != null">
+        #{grade_name,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingNumberTimes != null">
+        #{drivingNumberTimes,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kaamoo.customermanagement.entity.Enterprise">
+    update enterprise
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="allowOverdraw != null">
+        allowOverdraw = #{allowOverdraw,jdbcType=BIT},
+      </if>
+      <if test="grade_id != null">
+        grade_id = #{grade_id,jdbcType=BIGINT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="appKey != null">
+        appKey = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        companyId = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        companyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="drawMoney != null">
+        drawMoney = #{drawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="nodrawMoney != null">
+        nodrawMoney = #{nodrawMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenMoney != null">
+        frozenMoney = #{frozenMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="grade_name != null">
+        grade_name = #{grade_name,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingNumberTimes != null">
+        drivingNumberTimes = #{drivingNumberTimes,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kaamoo.customermanagement.entity.Enterprise">
+    update enterprise
+    set name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      allowOverdraw = #{allowOverdraw,jdbcType=BIT},
+      grade_id = #{grade_id,jdbcType=BIGINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      appKey = #{appKey,jdbcType=VARCHAR},
+      companyId = #{companyId,jdbcType=BIGINT},
+      companyName = #{companyName,jdbcType=VARCHAR},
+      drawMoney = #{drawMoney,jdbcType=DOUBLE},
+      nodrawMoney = #{nodrawMoney,jdbcType=DOUBLE},
+      frozenMoney = #{frozenMoney,jdbcType=DOUBLE},
+      grade_name = #{grade_name,jdbcType=VARCHAR},
+      drivingNumberTimes = #{drivingNumberTimes,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
